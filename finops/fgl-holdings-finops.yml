@@ -8,10 +8,11 @@ alignedWith:
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
 provider: FGL Holdings
 providerId: fgl-holdings
-publisherName: FGL Holdings
-serviceCategory: API
+publisherName: F&G Annuities & Life (subsidiary of Fidelity National Financial)
+serviceCategory: Insurance / Annuities
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
   - Insurance
   - Annuities
@@ -19,112 +20,43 @@ tags:
   - FinOps
   - Cost Management
   - FOCUS
-description: FinOps framework definition for the FGL Holdings API surface. Provides a FOCUS-aligned mapping
-  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
+description: FOCUS-aligned FinOps stub for FGL Holdings / F&G Annuities & Life. No public developer API
+  exists; carrier integrations are agent/IMO channel via DTCC, IRI, and proprietary distribution portals.
+  API-FinOps is therefore N/A; commercial flows are commission/policy economics, not API consumption.
+notes: No public API; FinOps lives in the policy administration / commission system. Retained as a stub.
+sources:
+  - https://www.fglife.com/
 principles:
   - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
+    description: Not applicable to API consumption; visibility lives in the policy administration / commission
+      system used by the IMO.
   - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
+    description: Allocation is at the policy / agent / IMO level in the carrier's policy admin system,
+      not via API meters.
   - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
+    description: Optimization is product / commission design, not API engineering.
   - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+    description: Distribution / IMO relationship management owns the partner relationship; no API budget
+      owner exists.
 billingModel:
-  pricingCategory: Usage-Based
-  billingFrequency: Monthly
+  pricingCategory: Insurance Commission Economics (Not API-Billed)
+  billingFrequency: Per-Policy
   billingCurrency: USD
   chargeCategories:
-    - Usage
     - Purchase
     - Tax
-    - Credit
     - Adjustment
-  chargeFrequency: Recurring
 focusColumns:
-  ServiceName: FGL Holdings
-  ServiceCategory: Developer Tools / API
-  ProviderName: FGL Holdings
-  PublisherName: FGL Holdings
-  InvoiceIssuerName: FGL Holdings
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  ServiceName: F&G Annuities & Life
+  ServiceCategory: Insurance / Annuities
+  ProviderName: F&G Annuities & Life
+  PublisherName: F&G Annuities & Life
+  InvoiceIssuerName: F&G Annuities & Life
+  PricingCategory: Insurance Commission
+  PricingUnit: not applicable
   BillingCurrency: USD
-  ChargeCategory: Usage
-meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
-    aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
-    aggregation: sum
-    dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: FGL Holdings API
-    baseURL: https://api.fglife.com
-    tags:
-      - Insurance
-      - Annuities
-      - Financial Services
-    serviceName: FGL Holdings API
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+  ChargeCategory: Purchase
+meters: []
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
