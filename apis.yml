@@ -2,7 +2,7 @@ aid: fgl-holdings
 url: https://raw.githubusercontent.com/api-evangelist/fgl-holdings/refs/heads/main/apis.yml
 name: FGL Holdings
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Insurance
   - Annuities
@@ -19,7 +19,7 @@ apis:
       - Insurance
       - Annuities
       - Financial Services
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     baseURL: https://api.fglife.com
     humanURL: https://developer.fglife.com
     properties:
