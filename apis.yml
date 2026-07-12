@@ -28,6 +28,8 @@ apis:
     description: >-
       The FGL Holdings API provides access to platform services and data for enterprise integration and automation.
 common:
+  - type: DomainSecurity
+    url: security/fgl-holdings-domain-security.yml
   - type: Website
     url: https://www.fglife.com
 maintainers:
