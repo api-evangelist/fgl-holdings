@@ -3,51 +3,38 @@ specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
 provider: FGL Holdings
 providerId: fgl-holdings
+generated: '2026-09-14'
+method: searched
+source: https://www.fglife.com/sitemap.xml
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
-reconciled: false
+modified: '2026-09-14'
+reconciled: true
 tags:
   - Insurance
   - Annuities
   - Financial Services
-description: FGL Holdings (Fidelity & Guaranty Life) is the parent of F&G Annuities & Life, an insurance
-  carrier issuing fixed and indexed annuities and life insurance through agents and IMOs. There is no
-  public developer API or developer portal for FGL Holdings or F&G; integrations with the carrier are
-  bilateral via DTCC, IRI, or proprietary IMO portals (e.g. F&G Producer Site / SaleSmart). The api.fglife.com
-  scaffold endpoint is not a publicly documented interface.
-notes: No public developer API or pricing. F&G Annuities & Life integrations are agent/IMO-channel via
-  industry consortia (DTCC IPS, IRI ACORD), not a self-service API. The plans scaffold has been retained
-  as a stub.
+description: >-
+  F&G Annuities & Life (FGL Holdings) publishes no API plans or API pricing of any kind, because it
+  publishes no public API. The corporate sitemap was read in full (88 URLs, 2026-09-14) and contains no
+  pricing, plans, developer or API section. There is no "contact sales" developer tier either — F&G is
+  an insurance carrier that distributes through appointed agents and IMOs, so the commercial
+  relationship is a distribution appointment, not an API subscription.
+notes: >-
+  plan_count is 0 and that is a measured zero, not a gap in our research. An earlier version of this
+  artifact described DTCC IPS / IRI / ACORD consortium integration as the commercial path; that claim
+  was not sourced to any F&G page and has been REMOVED — no F&G property names ACORD, DTCC or IRI.
+plan_count: 0
+plans: []
 sources:
-  - https://www.fglife.com/
-  - https://fnf.com/ (parent — Fidelity National Financial)
-plans:
-  - id: fgl-holdings-no-public-api
-    name: No Public API
-    type: enterprise
-    description: F&G integrates with distribution partners via DTCC, IRI, and proprietary IMO portals
-      under bilateral agreements; there is no self-service developer API.
-    entries:
-      - label: Distribution partner integration
-        description: Bilateral integration via DTCC IPS, IRI ACORD, or F&G Producer Site under partner
-          agreement.
-        name: distribution_integration
-        type: subscription
-        metric: contract
-        limit: -1
-        timeFrame: year
-        geo: US
-        unit: 1
-        price: contact carrier / IMO
-        userMultiplied: false
-    elements:
-      - name: DTCC Insurance Processing Service (IPS)
-      - name: IRI / ACORD standards
-      - name: F&G Producer Site
-      - name: 'Status: no public developer API'
+  - url: https://www.fglife.com/sitemap.xml
+    status: 200
+    finding: 88 URLs; no /pricing, /plans, /developer or /api path exists
+  - url: https://www.fglife.com/contact/agent-support
+    status: 200
+    finding: financial-professional support page offers the SalesLink portal and a phone number only
+  - url: https://developer.fglife.com/
+    status: 0
+    finding: NXDOMAIN — no developer portal exists
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

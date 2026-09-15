@@ -1,0 +1,59 @@
+generated: '2026-09-14'
+method: probed
+source: https://auth.fglife.com/.well-known/openid-configuration
+provider: FGL Holdings
+providerId: fgl-holdings
+description: >-
+  Scopes advertised by the F&G Annuities & Life authorization server (auth.fglife.com). These are the
+  OpenID Connect standard and profile-claim scopes the tenant exposes in scopes_supported — read
+  verbatim from the anonymous discovery document. F&G publishes no product API, so there are NO
+  resource/permission scopes of the kind a developer would request against a business API; the list
+  below governs identity and profile claims for portal sign-in only.
+notes: >-
+  No scopes/permissions reference page exists on any F&G property — searched www.fglife.com (full
+  sitemap, 88 URLs) and found no developer section. Scope descriptions below are the OIDC Core 1.0 /
+  Auth0 standard meanings for these names, not F&G prose; F&G publishes no per-scope documentation.
+authorization_server: https://auth.fglife.com/
+observed_request:
+  source: https://saleslink.fglife.com/ (HTTP 302 Location)
+  scope: offline_access openid profile email
+scopes:
+  - name: openid
+    description: Required to obtain an ID token; signals an OpenID Connect authentication request.
+    standard: OIDC Core 1.0
+  - name: profile
+    description: Requests the default profile claims (name, family_name, given_name, nickname, picture, updated_at).
+    standard: OIDC Core 1.0
+  - name: email
+    description: Requests the email and email_verified claims.
+    standard: OIDC Core 1.0
+  - name: address
+    description: Requests the address claim.
+    standard: OIDC Core 1.0
+  - name: phone
+    description: Requests the phone_number and phone_number_verified claims.
+    standard: OIDC Core 1.0
+  - name: offline_access
+    description: Requests a refresh token so the portal session can be renewed without re-prompting.
+    standard: OIDC Core 1.0
+  - name: name
+    description: Individual profile claim scope exposed by the Auth0 tenant.
+  - name: given_name
+    description: Individual profile claim scope exposed by the Auth0 tenant.
+  - name: family_name
+    description: Individual profile claim scope exposed by the Auth0 tenant.
+  - name: nickname
+    description: Individual profile claim scope exposed by the Auth0 tenant.
+  - name: picture
+    description: Individual profile claim scope exposed by the Auth0 tenant.
+  - name: email_verified
+    description: Individual profile claim scope exposed by the Auth0 tenant.
+  - name: created_at
+    description: Individual profile claim scope exposed by the Auth0 tenant.
+  - name: identities
+    description: Individual profile claim scope exposed by the Auth0 tenant (linked identity providers).
+scope_count: 14
+resource_scopes_published: false
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

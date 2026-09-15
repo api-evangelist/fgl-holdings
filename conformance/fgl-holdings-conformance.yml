@@ -1,0 +1,106 @@
+generated: '2026-09-14'
+method: probed
+source: https://auth.fglife.com/.well-known/openid-configuration
+provider: FGL Holdings
+providerId: fgl-holdings
+description: >-
+  Standards conformance for F&G Annuities & Life (FGL Holdings). Every positive assertion below is read
+  from the anonymous OpenID Connect discovery document served by the company's own authorization server
+  at auth.fglife.com. There is no public product API, so the API-shaped standards (RFC 9457 problem
+  details, JSON:API, OData, pagination, idempotency) have no surface to conform to and are recorded as
+  not-applicable rather than as failures.
+entries:
+  - id: oauth2
+    conforms: true
+    evidence: https://auth.fglife.com/.well-known/oauth-authorization-server
+    note: Authorization, token, revocation and device-code endpoints all advertised.
+  - id: oidc
+    conforms: true
+    evidence: https://auth.fglife.com/.well-known/openid-configuration
+    note: >-
+      Complete OpenID Connect Discovery 1.0 document; issuer, jwks_uri, userinfo_endpoint,
+      claims_supported and id_token_signing_alg_values_supported all present.
+  - id: rfc8414
+    conforms: true
+    title: OAuth 2.0 Authorization Server Metadata
+    evidence: https://auth.fglife.com/.well-known/oauth-authorization-server
+  - id: rfc7636
+    conforms: true
+    title: PKCE
+    evidence: 'code_challenge_methods_supported: [S256, plain]; live 302 from saleslink.fglife.com uses S256'
+  - id: rfc7009
+    conforms: true
+    title: OAuth 2.0 Token Revocation
+    evidence: revocation_endpoint https://auth.fglife.com/oauth/revoke
+  - id: rfc7591
+    conforms: true
+    title: OAuth 2.0 Dynamic Client Registration
+    evidence: registration_endpoint https://auth.fglife.com/oidc/register
+    note: Endpoint is advertised; public registration is not offered.
+  - id: rfc8628
+    conforms: true
+    title: OAuth 2.0 Device Authorization Grant
+    evidence: device_authorization_endpoint https://auth.fglife.com/oauth/device/code
+  - id: rfc8693
+    conforms: true
+    title: OAuth 2.0 Token Exchange
+    evidence: 'grant_types_supported includes urn:ietf:params:oauth:grant-type:token-exchange'
+  - id: rfc7523
+    conforms: true
+    title: JWT Profile for Client Authentication and Authorization Grants
+    evidence: 'private_key_jwt in token_endpoint_auth_methods_supported; jwt-bearer in grant_types_supported'
+  - id: rfc9449
+    conforms: true
+    title: OAuth 2.0 Demonstrating Proof of Possession (DPoP)
+    evidence: 'dpop_signing_alg_values_supported: [ES256]'
+  - id: oidc-backchannel-logout
+    conforms: true
+    evidence: 'backchannel_logout_supported: true; backchannel_logout_session_supported: true'
+  - id: ciba
+    conforms: true
+    title: OpenID Connect Client-Initiated Backchannel Authentication
+    evidence: 'backchannel_authentication_endpoint https://auth.fglife.com/bc-authorize; delivery mode poll'
+  - id: rfc9457
+    conforms: false
+    title: Problem Details for HTTP APIs
+    evidence: 'No public API. api.fglife.com returns {"statusCode":404,"message":"Resource not found"} — a bespoke envelope, not application/problem+json.'
+  - id: fhir
+    conforms: false
+    evidence: Not applicable — annuity and life carrier, no health-data exchange surface published.
+  - id: scim
+    conforms: false
+    evidence: No SCIM schema URN or /scim/v2 surface on any probed host.
+  - id: odata
+    conforms: false
+    evidence: No $metadata surface on any probed host.
+  - id: json-api
+    conforms: false
+    evidence: No public API surface.
+  - id: pagination
+    conforms: false
+    evidence: Not applicable — no public API surface.
+  - id: idempotency
+    conforms: false
+    evidence: Not applicable — no public API surface.
+domain_standards:
+  searched: true
+  found: false
+  note: >-
+    The insurance regime shortlist (ACORD, DTCC Insurance Processing Service, IRI standards, NAIC model
+    data) was checked against every public F&G surface. NOTHING on www.fglife.com names ACORD, DTCC or
+    IRI — the full 88-URL sitemap was read and the financial-professional support page mentions only the
+    SalesLink portal and a telephone number. No domain-standard conformance is asserted. This is a
+    reward-only dimension, so an absence is not a penalty; it is recorded here so a later round does not
+    re-litigate it or inherit an unsourced claim.
+  probed:
+    - url: https://www.fglife.com/sitemap.xml
+      status: 200
+      finding: 88 URLs, no developer/integration/standards section
+    - url: https://www.fglife.com/contact/agent-support
+      status: 200
+      finding: no ACORD/DTCC/IRI/API mention
+certifications_published: false
+compliance_program_published: false
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

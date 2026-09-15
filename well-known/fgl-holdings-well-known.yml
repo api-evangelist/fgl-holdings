@@ -1,0 +1,170 @@
+generated: '2026-09-14'
+method: probed
+source: live HTTPS probes of the RFC 8615 named path list on every host this record knows
+provider: FGL Holdings
+providerId: fgl-holdings
+description: >-
+  Well-known discovery probe for F&G Annuities & Life (FGL Holdings). Two real documents are served, and
+  both sit on the identity tier rather than a product API: auth.fglife.com — the company's Auth0 custom
+  domain fronting the prod.fglife.auth0.com tenant — publishes a complete OpenID Connect discovery
+  document and the RFC 8414 OAuth 2.0 authorization-server metadata at the same body. This is the
+  authorization server behind the SalesLink financial-professional portal. No security.txt, api-catalog
+  or ai-plugin manifest is served anywhere on the estate.
+notes: >-
+  mypolicy.fglife.com answers HTTP 200 with an HTML single-page-app shell for EVERY /.well-known/* path
+  probed, including paths that cannot exist. Those are recorded as misses, not hits — a soft-200 SPA
+  catch-all is not a served document. developer.fglife.com does not resolve in DNS (NXDOMAIN) and is
+  recorded with status 0.
+hosts:
+  - host: auth.fglife.com
+    role: authorization server (Auth0 custom domain for the prod.fglife.auth0.com tenant)
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 200
+        content_type: application/json; charset=utf-8
+        file: fgl-holdings-auth-openid-configuration.json
+        note: >-
+          Real OIDC discovery document. issuer https://auth.fglife.com/ — first-party to F&G.
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        content_type: application/json; charset=utf-8
+        file: fgl-holdings-auth-oauth-authorization-server.json
+        note: RFC 8414 metadata; byte-identical body to the OIDC discovery document.
+      - path: /.well-known/jwks.json
+        status: 200
+        content_type: application/json; charset=utf-8
+        file: fgl-holdings-auth-jwks.json
+        note: Public signing key set referenced by jwks_uri. Public keys only.
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: prod.fglife.auth0.com
+    role: underlying Auth0 tenant (canonical issuer behind the auth.fglife.com custom domain)
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 200
+        content_type: application/json; charset=utf-8
+        note: >-
+          Same authorization server, issuer https://prod.fglife.auth0.com/. Not saved separately —
+          the first-party custom-domain copy at auth.fglife.com is the canonical artifact.
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        content_type: application/json; charset=utf-8
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: www.fglife.com
+    role: corporate website
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: fglife.com
+    role: apex domain (301 redirect to www)
+    documents:
+      - path: /.well-known/security.txt
+        status: 301
+      - path: /.well-known/openid-configuration
+        status: 301
+      - path: /.well-known/oauth-authorization-server
+        status: 301
+      - path: /.well-known/api-catalog
+        status: 301
+      - path: /.well-known/ai-plugin.json
+        status: 301
+  - host: api.fglife.com
+    role: API host named by apis.yml baseURL (Azure Front Door; JSON 404 on every public path)
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: blog.fglife.com
+    role: corporate blog
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: saleslink.fglife.com
+    role: financial-professional portal (302 to the auth.fglife.com authorization endpoint)
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: mypolicy.fglife.com
+    role: policyholder portal (single-page app)
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        content_type: text/html
+        note: SPA shell, not a document — recorded as a MISS.
+      - path: /.well-known/openid-configuration
+        status: 200
+        content_type: text/html
+        note: SPA shell, not a document — recorded as a MISS.
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        content_type: text/html
+        note: SPA shell, not a document — recorded as a MISS.
+      - path: /.well-known/api-catalog
+        status: 200
+        content_type: text/html
+        note: SPA shell, not a document — recorded as a MISS.
+      - path: /.well-known/ai-plugin.json
+        status: 200
+        content_type: text/html
+        note: SPA shell, not a document — recorded as a MISS.
+  - host: developer.fglife.com
+    role: host named by the previous apis.yml humanURL — does not exist
+    documents:
+      - path: /.well-known/security.txt
+        status: 0
+        note: NXDOMAIN — host does not resolve.
+      - path: /.well-known/openid-configuration
+        status: 0
+        note: NXDOMAIN — host does not resolve.
+      - path: /.well-known/oauth-authorization-server
+        status: 0
+        note: NXDOMAIN — host does not resolve.
+      - path: /.well-known/api-catalog
+        status: 0
+        note: NXDOMAIN — host does not resolve.
+      - path: /.well-known/ai-plugin.json
+        status: 0
+        note: NXDOMAIN — host does not resolve.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

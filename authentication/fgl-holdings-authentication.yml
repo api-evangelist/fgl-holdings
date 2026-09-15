@@ -1,0 +1,93 @@
+generated: '2026-09-14'
+method: probed
+source: https://auth.fglife.com/.well-known/openid-configuration
+provider: FGL Holdings
+providerId: fgl-holdings
+description: >-
+  F&G Annuities & Life (FGL Holdings) publishes no public product API and no developer authentication
+  guide. It does operate a real, first-party OpenID Connect authorization server at auth.fglife.com — an
+  Auth0 custom domain fronting the prod.fglife.auth0.com tenant — which serves a complete OIDC discovery
+  document anonymously. Everything below is read verbatim from that document, not from prose. The
+  authorization server gates the SalesLink financial-professional portal; access is granted through an
+  IMO/broker-dealer appointment, not self-service registration, so no member of the public can obtain a
+  client credential.
+notes: >-
+  This artifact profiles an IDENTITY surface, not a product API. Recording it does not assert that F&G
+  offers a callable public API — it does not. See conventions/ and the apis.yml x-coverage block.
+issuer: https://auth.fglife.com/
+alternate_issuer: https://prod.fglife.auth0.com/
+provider_platform: Auth0 (custom domain)
+schemes:
+  - name: oidc_authorization_code_pkce
+    type: openIdConnect
+    in: header
+    scheme: bearer
+    bearer_format: JWT
+    openid_connect_url: https://auth.fglife.com/.well-known/openid-configuration
+    description: >-
+      Authorization Code with PKCE. Observed live: saleslink.fglife.com issues a 302 to
+      https://auth.fglife.com/authorize with response_type=code, code_challenge_method=S256,
+      response_mode=form_post and scope "offline_access openid profile email".
+    evidence: https://saleslink.fglife.com/ (HTTP 302, Location header)
+    public_client_registration: false
+  - name: oauth2_client_credentials
+    type: oauth2
+    flow: clientCredentials
+    token_endpoint: https://auth.fglife.com/oauth/token
+    description: >-
+      Declared in grant_types_supported. No public client registration; credentials are issued to
+      appointed distribution partners only.
+    gated: true
+endpoints:
+  authorization: https://auth.fglife.com/authorize
+  token: https://auth.fglife.com/oauth/token
+  userinfo: https://auth.fglife.com/userinfo
+  jwks_uri: https://auth.fglife.com/.well-known/jwks.json
+  revocation: https://auth.fglife.com/oauth/revoke
+  registration: https://auth.fglife.com/oidc/register
+  device_authorization: https://auth.fglife.com/oauth/device/code
+  backchannel_authentication: https://auth.fglife.com/bc-authorize
+  mfa_challenge: https://auth.fglife.com/mfa/challenge
+  global_token_revocation: https://auth.fglife.com/oauth/global-token-revocation/connection/{connectionName}
+grant_types_supported:
+  - authorization_code
+  - client_credentials
+  - refresh_token
+  - implicit
+  - password
+  - urn:ietf:params:oauth:grant-type:device_code
+  - urn:ietf:params:oauth:grant-type:token-exchange
+  - urn:ietf:params:oauth:grant-type:jwt-bearer
+  - http://auth0.com/oauth/grant-type/password-realm
+  - http://auth0.com/oauth/grant-type/passwordless/otp
+  - http://auth0.com/oauth/grant-type/mfa-oob
+  - http://auth0.com/oauth/grant-type/mfa-otp
+  - http://auth0.com/oauth/grant-type/mfa-recovery-code
+token_endpoint_auth_methods_supported:
+  - client_secret_basic
+  - client_secret_post
+  - private_key_jwt
+  - none
+code_challenge_methods_supported:
+  - S256
+  - plain
+id_token_signing_alg_values_supported:
+  - RS256
+  - PS256
+  - HS256
+dpop_signing_alg_values_supported:
+  - ES256
+mfa:
+  supported: true
+  evidence: mfa_challenge endpoint plus mfa-oob / mfa-otp / mfa-recovery-code grant types
+logout:
+  backchannel_logout_supported: true
+  backchannel_logout_session_supported: true
+gaps:
+  - No public developer documentation for authentication — no auth guide, no key-issuance page.
+  - No client registration open to the public; registration_endpoint exists but the portal is appointment-gated.
+  - No /.well-known/oauth-protected-resource anywhere on the estate (404 on auth.fglife.com and api.fglife.com).
+  - plain is advertised alongside S256 in code_challenge_methods_supported (Auth0 tenant default).
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

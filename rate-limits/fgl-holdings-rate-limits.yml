@@ -3,32 +3,36 @@ specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
 provider: FGL Holdings
 providerId: fgl-holdings
+generated: '2026-09-14'
+method: searched
+source: https://www.fglife.com/sitemap.xml
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
-reconciled: false
+modified: '2026-09-14'
+reconciled: true
 tags:
   - Insurance
   - Annuities
   - Financial Services
   - Rate Limiting
-description: F&G Annuities & Life (FGL Holdings) operates no public developer API; therefore no public
-  rate-limit documentation exists. Bilateral integrations through DTCC IPS, IRI ACORD, or the F&G Producer
-  Site follow industry-consortium throughput norms governed by the partner contract.
-notes: No public API; no published rate limits.
+description: >-
+  F&G Annuities & Life (FGL Holdings) documents no rate limits, because it publishes no public API.
+  No developer documentation exists on any F&G host, and the api.fglife.com gateway returns a bare
+  JSON 404 to every public path without rate-limit response headers.
+notes: >-
+  limit_count is 0 — a measured zero. No X-RateLimit-*, RateLimit-* or Retry-After header was observed
+  on any anonymous response from api.fglife.com, www.fglife.com or auth.fglife.com. An earlier version
+  of this artifact asserted DTCC IPS / IRI ACORD consortium throughput norms; that claim was not sourced
+  to any F&G page and has been REMOVED.
+limit_count: 0
+limits: []
+headers_observed: []
 sources:
-  - https://www.fglife.com/
-limits:
-  - name: No public API surface
-    scope: contract
-    metric: varies
-    limit: not applicable; no public API exists
-policies:
-  - name: Industry consortium throughput
-    description: DTCC IPS and IRI ACORD message-level throughput is governed by the consortium and the
-      partner agreement, not a public per-second ceiling.
+  - url: https://api.fglife.com/
+    status: 404
+    finding: 'bare JSON envelope {"statusCode":404,"message":"Resource not found"}; no rate-limit headers'
+  - url: https://www.fglife.com/sitemap.xml
+    status: 200
+    finding: no developer or API documentation section
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

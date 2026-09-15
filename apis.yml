@@ -14,55 +14,133 @@ deliveryModel:
   generated: '2026-08-28'
   method: derived
 accessModel:
-  pricing: unknown
-  onboarding: unknown
+  pricing: none
+  onboarding: partner
   trial: false
   try_now: false
   public: false
-  label: Unknown
-  confidence: low
+  label: No public API — integration is an appointment-gated distribution relationship
+  confidence: high
   source:
   - plans
-  generated: '2026-07-22'
-  method: derived
+  - probe
+  generated: '2026-09-14'
+  method: probed
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/fgl-holdings.png
 tags:
   - Insurance
   - Annuities
   - Financial-Services
+  - Life-Insurance
+  - Retirement
+  - Pension-Risk-Transfer
 tags_raw:
   - Insurance
   - Annuities
   - Financial Services
+  - Life Insurance
+  - Retirement
+  - Pension Risk Transfer
 description: >-
-  FGL Holdings is a major US corporation and Fortune 1000 company. The FGL Holdings API provides programmatic access to its platform services, data, and integrations for enterprise customers and partners.
+  FGL Holdings is the legacy holding-company name for F&G Annuities & Life, Inc., a US life insurance
+  and annuity carrier headquartered in Des Moines, Iowa and majority-owned by Fidelity National
+  Financial (FNF). F&G issues fixed indexed annuities (FIA), multi-year guaranteed annuities (MYGA),
+  registered index-linked annuities (RILA), indexed universal life insurance, and pension risk transfer
+  group annuities, distributing exclusively through appointed independent agents, Independent Marketing
+  Organizations (IMOs) and bank/broker-dealer partners. F&G publishes NO public developer API, no
+  developer portal and no machine-readable product contract — verified by direct probe on 2026-09-14.
+  What it does serve anonymously is a complete OpenID Connect discovery document at auth.fglife.com, the
+  first-party authorization server gating its SalesLink financial-professional portal.
 created: '2026-04-19'
-modified: '2026-04-19'
+modified: '2026-09-14'
 specificationVersion: '0.23'
 apis:
-  - aid: fgl-holdings:fgl-holdings-api
-    name: FGL Holdings API
+  - aid: fgl-holdings:fgl-holdings-identity
+    name: F&G Identity (auth.fglife.com)
     tags:
       - Insurance
-      - Annuities
       - Financial-Services
+      - Authentication
+      - OpenID-Connect
     tags_raw:
       - Insurance
-      - Annuities
       - Financial Services
+      - Authentication
+      - OpenID Connect
     image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://api.fglife.com
-    humanURL: https://developer.fglife.com
-    properties:
-      - url: https://developer.fglife.com/docs
-        type: Documentation
+    baseURL: https://auth.fglife.com
+    humanURL: https://www.fglife.com/contact/agent-support
     description: >-
-      The FGL Holdings API provides access to platform services and data for enterprise integration and automation.
+      The only machine-readable API surface F&G Annuities & Life publishes. auth.fglife.com is an Auth0
+      custom domain fronting the prod.fglife.auth0.com tenant, serving a complete OpenID Connect
+      discovery document and RFC 8414 authorization-server metadata anonymously. It gates the SalesLink
+      financial-professional portal and the policyholder portal. It supports Authorization Code with
+      PKCE (S256), client credentials, refresh tokens, device code, token exchange, DPoP (ES256), CIBA
+      and back-channel logout. This is an identity surface, NOT a product API — there is no public
+      client registration, and credentials are issued only to appointed distribution partners.
+    properties:
+      - url: well-known/fgl-holdings-auth-openid-configuration.json
+        type: OpenIDConnect
+      - url: authentication/fgl-holdings-authentication.yml
+        type: Authentication
+      - url: scopes/fgl-holdings-scopes.yml
+        type: OAuthScopes
 common:
-  - type: DomainSecurity
-    url: security/fgl-holdings-domain-security.yml
   - type: Website
     url: https://www.fglife.com
+  - type: Blog
+    url: https://blog.fglife.com
+  - type: BlogRSS
+    url: https://blog.fglife.com/rss.xml
+  - type: Support
+    url: https://www.fglife.com/contact/agent-support
+  - type: PrivacyPolicy
+    url: https://www.fglife.com/privacy-policy
+  - type: TermsOfService
+    url: https://www.fglife.com/website-terms
+  - type: GitHubOrganization
+    url: https://github.com/FGLife
+  - type: DomainSecurity
+    url: security/fgl-holdings-domain-security.yml
+  - type: WellKnown
+    url: well-known/fgl-holdings-well-known.yml
+  - type: Authentication
+    url: authentication/fgl-holdings-authentication.yml
+  - type: OAuthScopes
+    url: scopes/fgl-holdings-scopes.yml
+  - type: Conformance
+    url: conformance/fgl-holdings-conformance.yml
+  - type: LLMsTxt
+    url: llms/fgl-holdings-llms.txt
+  - type: Plans
+    url: plans/fgl-holdings-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/fgl-holdings-rate-limits.yml
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-09-14'
+  status: minimal
+  artifacts_added: 8
+  pass: local-v3
+x-coverage:
+  state: none
+  reason: not-a-software-company
+  detail: >-
+    F&G is an insurance carrier, not a software vendor — it sells annuities and life policies through
+    appointed agents and ships no software product, so there is no developer program: the humanURL this record carried,
+    developer.fglife.com, does not resolve in DNS, and api.fglife.com is a live Azure Front Door that
+    answers a bare JSON 404 to every public path including /openapi.json, /swagger.json, /api-docs,
+    /graphql and the full /.well-known/ named list; the only machine-readable document on the estate is
+    the OpenID Connect discovery doc at auth.fglife.com gating the appointment-only SalesLink portal.
+  evidence:
+    - url: https://developer.fglife.com/
+      status: 0
+    - url: https://api.fglife.com/openapi.json
+      status: 404
+    - url: https://www.fglife.com/sitemap.xml
+      status: 200
+    - url: https://auth.fglife.com/.well-known/openid-configuration
+      status: 200
+  checked: '2026-09-14'
