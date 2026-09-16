@@ -31,7 +31,7 @@ tags:
   - Insurance
   - Annuities
   - Financial-Services
-  - Life-Insurance
+  - Life Insurance
   - Retirement
   - Pension-Risk-Transfer
 tags_raw:
@@ -61,7 +61,7 @@ apis:
       - Insurance
       - Financial-Services
       - Authentication
-      - OpenID-Connect
+      - OpenID Connect
     tags_raw:
       - Insurance
       - Financial Services
