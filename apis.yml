@@ -30,7 +30,7 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/fgl-holdin
 tags:
   - Insurance
   - Annuities
-  - Financial-Services
+  - Financial Services
   - Life Insurance
   - Retirement
   - Pension-Risk-Transfer
@@ -41,6 +41,7 @@ tags_raw:
   - Life Insurance
   - Retirement
   - Pension Risk Transfer
+  - Financial-Services
 description: >-
   FGL Holdings is the legacy holding-company name for F&G Annuities & Life, Inc., a US life insurance
   and annuity carrier headquartered in Des Moines, Iowa and majority-owned by Fidelity National
@@ -59,7 +60,7 @@ apis:
     name: F&G Identity (auth.fglife.com)
     tags:
       - Insurance
-      - Financial-Services
+      - Financial Services
       - Authentication
       - OpenID Connect
     tags_raw:
@@ -67,6 +68,7 @@ apis:
       - Financial Services
       - Authentication
       - OpenID Connect
+      - Financial-Services
     image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     baseURL: https://auth.fglife.com
     humanURL: https://www.fglife.com/contact/agent-support
