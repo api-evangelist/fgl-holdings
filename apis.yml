@@ -88,6 +88,8 @@ apis:
       - url: scopes/fgl-holdings-scopes.yml
         type: OAuthScopes
 common:
+  - type: FinOps
+    url: finops/fgl-holdings-finops.yml
   - type: Website
     url: https://www.fglife.com
   - type: Blog
