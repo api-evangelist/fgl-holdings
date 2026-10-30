@@ -1,4 +1,4 @@
-# FGL Holdings (fgl-holdings)
+# FGL Holdings
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,23 +64,113 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-FGL Holdings is a major US corporation and Fortune 1000 company. The FGL Holdings API provides programmatic access to its platform services, data, and integrations for enterprise customers and partners.
+FGL Holdings is the legacy holding-company name for F&G Annuities & Life, Inc., a US life insurance and annuity carrier headquartered in Des Moines, Iowa and majority-owned by Fidelity National Financial (FNF). F&G issues fixed indexed annuities (FIA), multi-year guaranteed annuities (MYGA), registered index-linked annuities (RILA), indexed universal life insurance, and pension risk transfer group annuities, distributing exclusively through appointed independent agents, Independent Marketing Organizations (IMOs) and bank/broker-dealer partners. F&G publishes NO public developer API, no developer portal and no machine-readable product contract — verified by direct probe on 2026-09-14. What it does serve anonymously is a complete OpenID Connect discovery document at auth.fglife.com, the first-party authorization server gating its SalesLink financial-professional portal.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/fgl-holdings/refs/heads/main/apis.yml)
+**Areas:** Insurance · Annuities · Financial Services · Life Insurance · Retirement · Pension-Risk-Transfer
 
-**Run:** [Capabilities Using Naftiko](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=company-api-evangelist&utm_content=repo)
+## FGL Holdings on APIs.io
 
-## Tags:
+Everything profiled for FGL Holdings is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/fgl-holdings/](https://apis.io/providers/fgl-holdings/)** — or go straight to one of the APIs or properties below.
 
- - Insurance, Annuities, Financial Services
+### APIs (1)
 
-## Timestamps
+- [F&G Identity (auth.fglife.com)](https://apis.io/apis/fgl-holdings/fgl-holdings-identity/) — The only machine-readable API surface F&G Annuities & Life publishes. auth.fglife.com is an Auth0 custom domain fronting the prod.fglife.auth0.com tenant,…
 
-- **Created:** 2026-04-19
-- **Modified:** 2026-04-19
+### Published properties
 
-## Maintainers
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-**FN:** Kin Lane
+#### Security (2)
 
-**Email:** kin@apievangelist.com
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Fgl Holdings Authentication](https://apis.io/security/fgl-holdings/fgl-holdings-authentication/)
+- [Fgl Holdings Domain Security](https://apis.io/security/fgl-holdings/fgl-holdings-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Fgl Holdings Scopes](https://apis.io/scopes/fgl-holdings/fgl-holdings-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Fgl Holdings Plans Pricing](https://apis.io/plans/fgl-holdings/fgl-holdings-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Fgl Holdings Rate Limits](https://apis.io/rate-limits/fgl-holdings/fgl-holdings-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Fgl Holdings Finops](https://apis.io/finops/fgl-holdings/fgl-holdings-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.fglife.com)
+- [Support](https://www.fglife.com/contact/agent-support)
+- [Blog](https://blog.fglife.com)
+- [Terms of service](https://www.fglife.com/website-terms)
+- [Privacy policy](https://www.fglife.com/privacy-policy)
+- [GitHub](https://github.com/FGLife)
+
+## API Evangelist rating
+
+**Kin Score 18.0** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 0.0 |
+| Contract governance | 0.0 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 19.0 |
+| Access clarity | 21.1 |
+
+**Agent readiness 17.6** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+
+**Regulatory alignment 36.8** — Insurance
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/fgl-holdings/](https://apis.io/providers/fgl-holdings/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for FGL Holdings: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/fgl-holdings/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
